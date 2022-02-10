@@ -1,0 +1,36 @@
+version: "1.0"
+services:
+  masterDB:
+    container_name: "pk_master"
+    image: mysql:5.7
+    ports:
+      - 6605:3306
+    env_file:
+      ./master/master.env
+    volumes:
+      - ./master/conf/master.cnf:/etc/mysql/conf.d/master.cnf
+      - ./master/data:/var/lib/mysql
+      - ./pharmacy_keeper:/pharmacy_keeper
+    networks:
+      - overlay
+    healthcheck:
+      test: mysqladmin ping -h localhost --user=$$MYSQL_USER --password=$$MYSQL_PASSWORD
+      timeout: 20s
+      retries: 5
+  slaveDB:
+    container_name: "pk_slave"
+    image: mysql:5.7
+    ports:
+      - 6606:3306
+    env_file:
+      - ./slave/slave.env
+    volumes:
+      - ./slave/conf/slave.cnf:/etc/mysql/conf.d/slave.cnf
+      - ./slave/data:/var/lib/mysql
+    depends_on:
+      - masterDB
+    networks:
+      - overlay
+
+networks:
+  overlay:

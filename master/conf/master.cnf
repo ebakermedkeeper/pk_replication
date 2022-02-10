@@ -1,0 +1,10 @@
+[mysqld]
+max_connections=250
+server-id = 1
+bind-address = *
+log_bin = mysql-bin.log
+log_bin = on
+binlog_format = MIXED
+socket=/var/lib/mysql/mysql.sock
+skip-name-resolve
+innodb_buffer_pool_size = 64M
