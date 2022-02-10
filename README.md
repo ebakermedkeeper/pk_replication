@@ -21,4 +21,4 @@
 <br>3.Install Docker and Docker Compose
 <br>&nbsp;&nbsp;&nbsp;<code> brew install docker docker-compose</code>
 <h2>Installation:</h2>
-&nbsp;&nbsp;&nbsp;<code>./build.sh/code>
+&nbsp;&nbsp;&nbsp;<code>./build.sh </code>
